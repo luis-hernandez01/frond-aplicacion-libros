@@ -1,0 +1,46 @@
+<section class="bg-white dark:bg-white py-12">
+  <div class="max-w-screen-xl mx-auto px-4">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div
+        class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between pb-4 bg-white dark:bg-gray-900 px-4">
+        <div>
+          <app-button-modal [disabled]="isLoading" [loading]="isLoading" (run_scraping)="excute()"
+            id="Button_scraping"></app-button-modal>
+        </div>
+        <div class="relative w-full md:w-80">
+          <app-search class="w-full ps-10" (filtroChange)="filtroTexto = $event"></app-search>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6">
+        <div *ngFor="let book of listbooks | categoryFilter: filtroTexto"
+          class="w-72 h-[360px] flex flex-col justify-between bg-white border border-gray-200 rounded-lg shadow-md p-4 dark:bg-gray-800 dark:border-gray-700">
+
+          <div class="overflow-hidden">
+            <h5 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2" title="{{ book.title }}">
+              {{ book.title }}
+            </h5>
+
+            <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 truncate">
+              <strong>Precio:</strong> {{ book.price }}
+            </p>
+            <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 truncate">
+              <strong>Rating:</strong> {{ book.rating }}
+            </p>
+            <p class="text-sm text-gray-700 dark:text-gray-300 mb-1 truncate">
+              <strong>Stock:</strong> {{ book.stock }}
+            </p>
+            <p class="text-sm text-gray-700 dark:text-gray-300 truncate">
+              <strong>Categoría:</strong> {{ book.category }}
+            </p>
+          </div>
+          <div class="pt-3">
+            <app-button-actions (action)="view_detail(book.id)"></app-button-actions>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-form [visible]="mostrarModal" [data]="bookSelected"></app-form>
