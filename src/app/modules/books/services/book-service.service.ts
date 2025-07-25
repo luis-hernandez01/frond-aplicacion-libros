@@ -8,59 +8,32 @@ import { catchError, map, Observable, of, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class BookServiceService {
-private readonly URL = environment.api
-  // items: booksModel[] = [];
+  private readonly URL = environment.api
   constructor(private http: HttpClient) {
   }
 
-  // getAllbooks$(): Observable<any> {
-  //   return this.http.get(`${this.URL}`)
-  //     .pipe(
-  //       map(({ data }: any) => {
-  //         return data
-  //       })
-  //     )
-  // }
-
-
-  // searchTracks$(term: string): Observable<any> {
-  //   return this.http.get(`${this.URL}?category=${term}`)
-  //     .pipe(
-  //       // tap((response) => console.log('Respuesta del backend:', response)),
-  //       map((dataRaw: any) => dataRaw)
-  //     )
-  // }
-
   searchTracks$(term: string): Observable<any[]> {
-  return this.http.get(`${this.URL}?category=${term}`).pipe(
-    map((response: any) => {
-      if (Array.isArray(response)) {
-        return response;
-      } else {
-        console.warn('La respuesta no es un array:', response);
-        return [];
-      }
-    }),
-    catchError((error) => {
-      console.error('Error en la petición HTTP:', error);
-      return of([]);
-    })
-  );
-}
+    return this.http.get(`${this.URL}?category=${term}`).pipe(
+      map((response: any) => {
+        if (Array.isArray(response)) {
+          return response;
+        } else {
+          console.warn('La respuesta no es un array:', response);
+          return [];
+        }
+      }),
+      catchError((error) => {
+        console.error('Error en la petición HTTP:', error);
+        return of([]);
+      })
+    );
+  }
 
   getAllbooks$(): Observable<booksModel[]> {
-  return this.http.get<booksModel[]>(`${this.URL}`);
-}
+    return this.http.get<booksModel[]>(`${this.URL}`);
+  }
 
-// searchTracks$(term: string): Observable<any> {
-//     return this.http.get(`${this.URL}?category = ${term}`)
-//       .pipe(
-//         map((dataRaw: any) => dataRaw.data)
-//       )
-//   }
-
-
-getBooks(category?: string) {
+  getBooks(category?: string) {
     let url = `${this.URL}`;
     if (category) url += `?category=${category}`;
     return this.http.get<booksModel[]>(url);
@@ -77,11 +50,4 @@ getBooks(category?: string) {
   scrapingBooks() {
     return this.http.post(`${this.URL}/scrape-books`, {});
   }
-
-//   searchBooksByCategory$(category: string): Observable<booksModel[]> {
-//   const params = new HttpParams().set('category', category);
-
-//   return this.http.get<booksModel[]>(`${this.URL}/books`, { params });
-// }
-
 }

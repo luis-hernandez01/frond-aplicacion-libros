@@ -10,9 +10,7 @@ import { booksModel } from '../../../core/model/books.model';
 })
 export class FormComponent {
   @Input() visible = false;
-  // @Input() data: any;
   @Input() data?: booksModel;
-
 
   close() {
     this.visible = false;

@@ -51,7 +51,6 @@ export class BooksPagesComponent implements OnInit {
     }
   }
 
-
   view_detail(id?: number) {
     if (id === undefined) return;
     this.DataResult(id);

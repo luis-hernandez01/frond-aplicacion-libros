@@ -8,6 +8,8 @@ import { FormComponent } from './components/form/form.component';
 import { ButtonModalComponent } from './components/button-modal/button-modal.component';
 import { ButtonActionsComponent } from './components/button-actions/button-actions.component';
 import { CategoryFilterPipe } from './pipes/category-filter.pipe';
+import { BooklistComponent } from './components/booklist/booklist.component';
+import { BookCardComponent } from './components/book-card/book-card.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { CategoryFilterPipe } from './pipes/category-filter.pipe';
     FormComponent,
     ButtonModalComponent,
     ButtonActionsComponent,
-    CategoryFilterPipe
+    CategoryFilterPipe,
+    BooklistComponent,
+    BookCardComponent
     
   ],
   imports: [
@@ -32,7 +36,9 @@ import { CategoryFilterPipe } from './pipes/category-filter.pipe';
     FormComponent,
     ButtonModalComponent,
     ButtonActionsComponent,
-    CategoryFilterPipe
+    CategoryFilterPipe,
+    BooklistComponent,
+    BookCardComponent
   ]
 })
 export class SharedModule { }
